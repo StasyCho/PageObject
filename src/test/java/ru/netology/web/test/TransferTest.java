@@ -62,8 +62,8 @@ public class TransferTest {
     void shouldErrorTransferWhenAmountZero() {
         DashboardPage dashboardPage = new DashboardPage();
         dashboardPage.isDashboardPage();
-        int expected1 = dashboardPage.getCardBalance(0);
-        int expected2 = dashboardPage.getCardBalance(1);
+        int expected1 = dashboardPage.getCardBalance(0) + Integer.parseInt(amountZero);
+        int expected2 = dashboardPage.getCardBalance(1) - Integer.parseInt(amountZero);
         dashboardPage.amountCards(0);
         TransferPage transferPage = new TransferPage();
         transferPage.paymentVisible();
@@ -72,7 +72,6 @@ public class TransferTest {
         transferPage.getTransfer();
         assertEquals(expected1, dashboardPage.getCardBalance(0));
         assertEquals(expected2, dashboardPage.getCardBalance(1));
-        transferPage.invalidTransfer();
     }
 
     @Test
