@@ -15,6 +15,8 @@ public class TransferTest {
     private String amountOne = "1";
     private String amountOverLimit = "10001";
 
+    private String amountPanny = "0,1";
+
 
     @BeforeEach
     public void setup() {
@@ -103,5 +105,20 @@ public class TransferTest {
         //Должна быть ошибка с текстом: "Недостаточно средств для выполнения операции!"
         transferPage.invalidTransfer();
     }
-    
+    @Test
+    void shouldTransferAmountPanny() {
+        DashboardPage dashboardPage = new DashboardPage();
+        dashboardPage.isDashboardPage();
+        int expected1 = dashboardPage.getCardBalance(0) + Integer.parseInt(amountPanny);
+        int expected2 = dashboardPage.getCardBalance(1) - Integer.parseInt(amountPanny);
+        dashboardPage.amountCards(0);
+        TransferPage transferPage = new TransferPage();
+        transferPage.paymentVisible();
+        transferPage.setAmount(amountPanny);
+        transferPage.setFromCardField(DataHelper.getSecondCard());
+        transferPage.getTransfer();
+        assertEquals(expected1, dashboardPage.getCardBalance(0));
+        assertEquals(expected2, dashboardPage.getCardBalance(1));
+    }
+
 }
