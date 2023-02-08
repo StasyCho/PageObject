@@ -103,5 +103,5 @@ public class TransferTest {
         //Должна быть ошибка с текстом: "Недостаточно средств для выполнения операции!"
         transferPage.invalidTransfer();
     }
-
+    
 }
