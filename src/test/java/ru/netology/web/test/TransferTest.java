@@ -15,7 +15,7 @@ public class TransferTest {
     private String amountOne = "1";
     private String amountOverLimit = "10001";
 
-    private String amountPanny = "0,1";
+    private String amountPanny = "0.1";
 
 
     @BeforeEach
@@ -109,8 +109,8 @@ public class TransferTest {
     void shouldTransferAmountPanny() {
         DashboardPage dashboardPage = new DashboardPage();
         dashboardPage.isDashboardPage();
-        int expected1 = dashboardPage.getCardBalance(0) + Integer.parseInt(amountPanny);
-        int expected2 = dashboardPage.getCardBalance(1) - Integer.parseInt(amountPanny);
+        double expected1 = dashboardPage.getCardBalance(0) + Double.parseDouble(amountPanny);
+        double expected2 = dashboardPage.getCardBalance(1) - Double.parseDouble(amountPanny);
         dashboardPage.amountCards(0);
         TransferPage transferPage = new TransferPage();
         transferPage.paymentVisible();
